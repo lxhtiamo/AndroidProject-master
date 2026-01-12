@@ -1,5 +1,6 @@
 package com.hjq.demo.ui.activity.common;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -105,9 +106,15 @@ public final class BrowserActivity extends AppActivity
 
     @Override
     public void onLeftClick(@NonNull TitleBar titleBar) {
-        finish();
+        if (mBrowserView.canGoBack()) {
+            mBrowserView.goBack();
+        }else {
+            finish();
+        }
+
     }
 
+    @SuppressLint("GestureBackNavigation")
     @Override
     public boolean onKeyDown(int keyCode, @NonNull KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
